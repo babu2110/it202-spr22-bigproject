@@ -25,7 +25,6 @@ db.settings.where("name").equals("mode").toArray((arr) => {
             switchControl.selected = false;
         } else {
             switchControl.selected = true;
-            // document.querySelector(".card.template").style.backgroundColor = "black";
         }
     }
 })
@@ -39,29 +38,44 @@ document.querySelector(".mdc-switch").addEventListener("click", (f)=> {
 });
 //
 const drawer = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
-
+// once drawer icon has been clicked.
 document.querySelector(".mdc-top-app-bar__navigation-icon").addEventListener("click", (e)=>{
   drawer.open = true;
 });
-
+// Modifying navigation bar color
 document.querySelector(".mdc-top-app-bar__section--align-start").style.backgroundColor = "green";
 document.querySelector(".mdc-top-app-bar__section--align-end").style.backgroundColor = "green";
-document.querySelector(".main-section#home").style.display= "block";
 
-let checkSelected = document.querySelector(".mdc-list-item").getAttribute('aria-selected');
-let itemText = document.querySelector(".mdc-list-item__text").innerHTML;
-if( itemText == "Park News" && checkSelected) {
-    console.log("Clicked on Park News")
-} else if(itemText == "Planning" && checkSelected) {
-    console.log("Planning");
-} else if (itemText == "National Parks" && checkSelected) {
-    console.log("National Parks");
-} else if (itemText == "Weather" && checkSelected){
-    console.log("Weather");
-}
+document.querySelector(".main-section#section-home").style.display= "block";
+
+// contenting what is included inside main
+document.querySelector("#nav-home").addEventListener("click", (e)=> {
+    document.querySelector(".main-section").style.display= "none";
+    document.querySelector(".main-section#section-home").style.display= "block";
+    drawer.open = false;
+});
+document.querySelector("#nav-planning").addEventListener("click", (e)=> {
+    document.querySelector(".main-section").style.display= "none";
+    document.querySelector(".main-section#section-planning").style.display= "block";
+    drawer.open = false;
+});
+document.querySelector("#nav-map").addEventListener("click", (e)=> {
+    document.querySelector(".main-section").style.display= "none";
+    document.querySelector(".main-section#section-map").style.display= "block";
+    drawer.open = false;
+});
+document.querySelector("#nav-weather").addEventListener("click", (e)=> {
+    document.querySelector(".main-section").style.display= "none";
+    document.querySelector(".main-section#section-weather").style.display= "block";
+    drawer.open = false;
+});
+document.querySelector("#TNP-Menu").addEventListener("click", (e)=> {
+    drawer.open = false;
+});
+
 
 // cards
-let url = "https://data.cityofchicago.org/resource/xzkq-xp2w.json";
+let url = "https://developer.nps.gov/api/v1/parks?&api_key=mxKaB5lYe9n8BavBHs7gkOhegZ31rqcRnrZOihvi";
 
 fetch (url)
   .then ( (response) => {
@@ -70,30 +84,30 @@ fetch (url)
   .then ((json) => {
     console.log(json)
 
-    json.forEach (item => {
+    json.data.forEach (item => {
       // clone the template
-      let clone = document.querySelector("div.card.template").cloneNode(true);
+      let clone = document.querySelector("div.mdc-card").cloneNode(true);
 
 
-      // // update values in the clone
-      clone.querySelector("h5.card-title").innerText = item.name;
+      // update values in the clone
+      clone.querySelector("div.mdc-card__media-content").innerText = item.fullName;
+      console.log(clone.querySelector("div.mdc-card__media-content").innerText);
 
-      clone.querySelector("h6.card-subtitle.mb-2.text-muted").innerText = item.department;
+    //   clone.querySelector("h6.card-subtitle.mb-2.text-muted").innerText = item.department;
 
-      let a = item.job_titles;
-      a = a + "\n" +"Annual Salary is "+ item.annual_salary;
-      clone.querySelector("p.card-text").innerText = a;
+    //   let a = item.job_titles;
+    //   a = a + "\n" +"Annual Salary is "+ item.annual_salary;
+    //   clone.querySelector("p.card-text").innerText = a;
       
-      clone.querySelector("a.card-link").innerText = "City of Chicago"
-      clone.querySelector("a.card-link").href = "https://data.cityofchicago.org/";
-      // // remove hidden 
+    //   clone.querySelector("a.card-link").innerText = "City of Chicago"
+    //   clone.querySelector("a.card-link").href = "https://data.cityofchicago.org/";
+    //   // // remove hidden 
 
-      clone.removeAttribute("hidden");
-      clone.classList.remove("template");
+    //   clone.removeAttribute("hidden");
+    //   clone.classList.remove("template");
 
-      // insert clone into DOM
-      document.body.append(clone);
+    //   // insert clone into DOM
+    //   document.body.append(clone);
 
     });
-
-  })
+  });
