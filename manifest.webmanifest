@@ -1,0 +1,14 @@
+{
+  "name": "Travel National Parks",
+  "short_name": "TNP",
+  "start_url": "./",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color":"#ffffff",
+  "icons": [
+    {
+      "src": "https://www.visitbigsky.com/sites/default/files/styles/scale_800/public/2021-05/yellowstone.jpg?itok=VaVamuG0",
+      "sizes": "512x512",
+      "type": "image/png"
+    }]
+}
