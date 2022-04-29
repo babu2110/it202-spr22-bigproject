@@ -28,12 +28,10 @@ db.settings.where("name").equals("mode").toArray((arr) => {
         }
     }
 })
-
 document.querySelector(".mdc-switch").addEventListener("click", (f)=> {
-
     let newMode = switchControl.selected ? "dark-mode" : "light-mode"
-    document.querySelector("body").className = newMode;
 
+    document.querySelector("body").className = newMode;
     db.settings.put({name: "mode", value: newMode})
 });
 //
@@ -90,24 +88,29 @@ fetch (url)
 
 
       // update values in the clone
-      clone.querySelector("div.mdc-card__media-content").innerText = item.fullName;
-      console.log(clone.querySelector("div.mdc-card__media-content").innerText);
+      clone.querySelector("div.mdc-card__actions").innerText = item.fullName;
+      clone.querySelector("div.mdc-card__media").style.backgroundImage = "url("+item.images[0].url+")";
+      let count = 0;
 
-    //   clone.querySelector("h6.card-subtitle.mb-2.text-muted").innerText = item.department;
+      clone.querySelector("#firstPara").addEventListener('click', (e)=> {
+          if(count % 2 == 0) {
+            clone.querySelector("#description").hidden = false;
+          } else {
+            clone.querySelector("#description").hidden = true;
+          }
+          count++;
+      });
+      let getActivities = "";
+        item.activities.forEach(x => {
+            getActivities = getActivities + x.name + "\n";
+        });
+      clone.querySelector("#description").innerText = item.description + "\nActivities: \n" + getActivities;
+      clone.removeAttribute("hidden");
 
-    //   let a = item.job_titles;
-    //   a = a + "\n" +"Annual Salary is "+ item.annual_salary;
-    //   clone.querySelector("p.card-text").innerText = a;
-      
-    //   clone.querySelector("a.card-link").innerText = "City of Chicago"
-    //   clone.querySelector("a.card-link").href = "https://data.cityofchicago.org/";
-    //   // // remove hidden 
-
-    //   clone.removeAttribute("hidden");
     //   clone.classList.remove("template");
 
     //   // insert clone into DOM
-    //   document.body.append(clone);
-
+      document.body.append(clone);
     });
+    
   });

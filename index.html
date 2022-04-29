@@ -89,25 +89,28 @@
   <div class="mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
     <main class="main-content" id="main-content">
       <section id = "section-home" class = "main-section">
-        Hello HOME
         <!-- The card that is found in Material components -->
-        <div class="mdc-card mdc-card--outlined">
+        <div class="mdc-card" hidden>
+          <!-- Inside the div that contains every cards -->
+          <div class="mdc-card__actions my-card-title">Title</div>
           <div class="mdc-card__primary-action">
-            <div class="mdc-card__media mdc-card__media--square">
-              <div class="mdc-card__media-content">Title</div>
+            <div class="mdc-card__media mdc-card__media--16-9 my-card-content my-card__media" id = "firstPara">
             </div>
             <!-- ... additional primary action content ... -->
             <div class="mdc-card__ripple"></div>
-          </div>
+        </div>
+        <div class="mdc-card__media my-card-description" id = "description" hidden>Title</div>
           <div class="mdc-card__actions">
             <div class="mdc-card__action-buttons">
               <button class="mdc-button mdc-card__action mdc-card__action--button">
                 <div class="mdc-button__ripple"></div>
-                <span class="mdc-button__label">Action 1</span>
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">beenhere</i>
+                <span class="mdc-button__label">Like</span>
               </button>
               <button class="mdc-button mdc-card__action mdc-card__action--button">
                 <div class="mdc-button__ripple"></div>
-                <span class="mdc-button__label">Action 2</span>
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">thermostat</i>
+                <span class="mdc-button__label">Dislike</span>
               </button>
             </div>
             <div class="mdc-card__action-icons">

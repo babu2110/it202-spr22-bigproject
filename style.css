@@ -14,13 +14,27 @@ body {
   display:none;
 }
 
+.my-card__media {
+  background-image: url("");
+}
+
+.my-card-description {
+  font-size: larger;
+  margin-left: 8px;
+}
+.my-card-title {
+  font-size: larger;
+}
+.my-card-content {
+  font-size: larger;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 16px;
+}
+
 .light-mode {
   color:black; background-color:white;
 }
 .dark-mode {
-  color:white; background-color: black;
-}
-
-.card-body {
-  color: grey;
+  color:blue; background-color: black;
 }
