@@ -38,3 +38,14 @@ body {
 .dark-mode {
   color:blue; background-color: black;
 }
+
+#map {
+  height: 100%;
+  width: 100%;
+  margin: "0px";
+  padding: "0px"
+}
+
+.weather-card{
+  margin: "8px";
+}

@@ -12,6 +12,7 @@
   <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
   <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script
 </head>
 
@@ -87,6 +88,7 @@
   <div class="mdc-drawer-scrim"></div>
   <!-- Inside drawer main class exist. -->
   <div class="mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
+    <!-- The main starts here -->
     <main class="main-content" id="main-content">
       <section id = "section-home" class = "main-section">
         <!-- The card that is found in Material components -->
@@ -120,14 +122,33 @@
           </div>
         </div>
       </section>
+      <!-- Planning -->
       <section id = "section-planning" class = "main-section">
-        HELLO planning
+        <div id = "chart_div"></div>
+        <div id = "curve_chart"></div>
       </section>
       <section id = "section-map" class = "main-section">
-        HELLO map
+       <div id="map"></div>
       </section>
-      <section id = "section-weather" class = "main-section">
-        HELLO weather
+      <section id = "section-weather" class = "weather-card">
+        <div class="mdc-card" id="weather-card-content">
+          <div class="mdc-card__primary-action">
+            <div class="mdc-card__media mdc-card__media--16-9">
+              <div class="mdc-card__media-content">Location</div>
+            </div>
+            <!-- ... additional primary action content ... -->
+            <div class="mdc-card__ripple"></div>
+          </div>
+          <div class="mdc-card__actions">
+            <div class="mdc-card__action-buttons">
+              <button class="mdc-button mdc-card__action mdc-card__action--button" id ="expand">
+                <div class="mdc-button__ripple"></div>
+                <span class="mdc-button__label">Expand</span>
+              </button>
+            </div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   </div>
@@ -135,6 +156,10 @@
   <script src="script.js">
 
   </script>
+  <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD99B_ZRHPEcCbCUCdeRMYnAimmN5r69Lo&callback=initMap&v=weekly"
+      async
+    ></script>
 </body>
 
 </html>
