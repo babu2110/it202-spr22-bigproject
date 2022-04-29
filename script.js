@@ -93,7 +93,7 @@ fetch (url)
     return response.json();
   })
   .then ((json) => {
-    console.log(json)
+    // console.log(json)
 
     json.data.forEach (item => {
       // clone the template
@@ -178,17 +178,31 @@ fetch (url)
 // weather api fails
 //g 37.0902°, Lat -95.7129°.
 //41.8781° N, 87.6298° W
-  
+
 let crimeUrl = "https://weatherdbi.herokuapp.com/data/weather/chicago";
 
   fetch(crimeUrl).then( (response)=> {
       return response.json()
   }).then( (json)=> {
-    console.log(json.region);
+      console.log(json);
+    document.querySelector("#weather-card-title").innerText = "Location: " + json.region + ", "+json.currentConditions.comment + ", " + json.currentConditions.dayhour;
+    let catchWeek = "";
     json.next_days.forEach( (e)=> {
-        console.log(e.day);
-        console.log(e.comment)
+        catchWeek = catchWeek + e.day + ", " + e.comment + ", High: " + e.max_temp.f + ", Low: " + e.max_temp.c+"\n";
     })
+    document.querySelector("#weekWeather").innerText = catchWeek;
+    let count = 0;
+    document.querySelector("#expand").addEventListener('click', (e)=>{
+        if(count %2 == 0) {
+            document.querySelector("#weekWeather").hidden = false;
+            document.querySelector("#expand").innerText = "SHRINK";
+        } else {
+            document.querySelector("#weekWeather").hidden = true;
+            document.querySelector("#expand").innerText = "EXPAND";
+        }
+        count++;
+    })
+
   })
 // charts
 let urlPie = "https://data.cityofchicago.org/resource/dw27-rash.json?$SELECT=school_type,count(school_type)&$GROUP=school_type";

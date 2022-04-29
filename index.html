@@ -87,7 +87,7 @@
   </aside>
   <div class="mdc-drawer-scrim"></div>
   <!-- Inside drawer main class exist. -->
-  <div class="mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
+  <div class="mdc-drawer-app-content mdc-top-app-bar--fixed-adjust main-content">
     <!-- The main starts here -->
     <main class="main-content" id="main-content">
       <section id = "section-home" class = "main-section">
@@ -132,9 +132,9 @@
       </section>
       <section id = "section-weather" class = "weather-card">
         <div class="mdc-card" id="weather-card-content">
-          <div class="mdc-card__primary-action">
+          <div id = "weather-card-title"><i class="material-icons mdc-list-item__graphic" aria-hidden="true">thermostat</i>Location</div><br>
+          <div class="mdc-card__primary-action" id = "weekWeather" hidden>
             <div class="mdc-card__media mdc-card__media--16-9">
-              <div class="mdc-card__media-content">Location</div>
             </div>
             <!-- ... additional primary action content ... -->
             <div class="mdc-card__ripple"></div>
@@ -148,7 +148,6 @@
             </div>
             </div>
           </div>
-        </div>
       </section>
     </main>
   </div>
