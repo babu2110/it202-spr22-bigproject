@@ -127,54 +127,55 @@ fetch (url)
     });
     
   });
+  //Google maps
+  let map;
+  const breaker = document.createElement('br');
+  function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+      // 46.8625° N, 103.8467° E , Where I came from
+      center: { lat: 46.8625, lng: 103.8467 },
+      zoom: 3,
+    });
+    const displayLoc = document.querySelector("#currentLoc");
+    const date = new Date();
+    // check whether the geolocation is available on the html
+    if('geolocation' in navigator){
+      // watch the location
+      const watchId = navigator.geolocation.watchPosition((pos) => {
+        map.setCenter({lat: pos.coords.latitude, lng: pos.coords.longitude});
+        map.setZoom(18);
+        displayLoc.append(breaker.cloneNode());
+        displayLoc.append('Lat: ' + pos.coords.latitude + ', ' + 'Lng: '+pos.coords.longitude + ' ' + date.toString());
+        //42.031061, Lng: -87.7463605
+        //42.031073, Lng: -87.7463439
+        // Here just show all the National Park and mark the location of visited places. If we reach one of the location,
+        // the google map will have a marker that says visited.
+        // if(pos.coords.latitude == 42.031061 && pos.coords.longitude == -87.7463605) {
+        //     const m = new google.maps.Marker({
+        //         //41.8696° N, 87.6496° W
+        //         position: { lat: 42.0310589, lng: -87.7463582 },
+        //         map,
+        //         title: "Visited"
+        //     })
+        // }
+        const path = new google.maps.Circle({
+          center: {lat: parseFloat(pos.coords.latitude), lng: parseFloat(pos.coords.longitude)},
+          strokeColor: "#FF0000",
+          stokeWeight: 10,
+          fillColor: "#FF0000",
+          fillOpacity: 1,
+          radius: 2,
+        });
 
- //Google Map
- let map;
- function initMap() {
-   map = new google.maps.Map(document.getElementById("map"), {
-     //41.8781° N, 87.6298° W
-     center: { lat: 41.8781, lng: -87.6298 },
-     zoom: 10,
-   });
- 
-   const m = new google.maps.Marker({
-     //41.8696° N, 87.6496° W
-     position: { lat: 41.8696, lng: -87.6496 },
-     map,
-     title: "UIC"
-   })
- 
-   const contentStr = 
-     '<div id="content">' +
-     '<div id="siteNotice">' +
-     "</div>" +
-     '<h1 id="firstHeading" class="firstHeading">UIC</h1>' +
-     '<div id="bodyContent">' +
-     "<p><b>UIC</b>, also referred to as <b>University of Illinois at Chicago</b>, is a large " +
-     "sandstone rock formation in the southern part of the " +
-     "Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) " +
-     "south west of the nearest large town, Alice Springs; 450&#160;km " +
-     "(280&#160;mi) by road. Kata Tjuta and Uluru are the two major " +
-     "features of the Uluru - Kata Tjuta National Park. Uluru is " +
-     "sacred to the Pitjantjatjara and Yankunytjatjara, the " +
-     "Aboriginal people of the area. It has many springs, waterholes, " +
-     "rock caves and ancient paintings. Uluru is listed as a World " +
-     "Heritage Site.</p>" +
-     '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
-     "https://en.wikipedia.org/w/index.php?title=Uluru</a> " +
-     "(last visited June 22, 2009).</p>" +
-     "</div>" +
-     "</div>";
-   const infoW = new google.maps.InfoWindow({
-     content: contentStr,
-   })
- 
-   m.addListener("click", () => {
-     infoW.open({
-       anchor: m, map, shouldFocus: false,
-     });
-   });
- }
+        // draw it on the map
+        path.setMap(map);
+      });
+    } else {
+      displayLoc.insertAdjacentText('afterbegin', 'The browser does not support geolocation!')
+      console.log("Geolocation is not in Navigator!")
+    }
+  }
+  window.initMap = initMap;
 // weather api fails
 //g 37.0902°, Lat -95.7129°.
 //41.8781° N, 87.6298° W
@@ -184,7 +185,7 @@ let crimeUrl = "https://weatherdbi.herokuapp.com/data/weather/chicago";
   fetch(crimeUrl).then( (response)=> {
       return response.json()
   }).then( (json)=> {
-      console.log(json);
+    //   console.log(json);
     document.querySelector("#weather-card-title").innerText = "Location: " + json.region + ", "+json.currentConditions.comment + ", " + json.currentConditions.dayhour;
     let catchWeek = "";
     json.next_days.forEach( (e)=> {

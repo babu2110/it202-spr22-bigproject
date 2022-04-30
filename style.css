@@ -1,8 +1,8 @@
 .wow {
   width: 100px;
 }
-
-body {
+html, body {
+  height: 100%;
   margin: 0px;
 }
 
@@ -11,7 +11,11 @@ body {
 }
 
 .main-section {
+  height:100%;
   display:none;
+}
+#currentLoc{
+  margin-top: 50px;
 }
 
 .my-card__media {
